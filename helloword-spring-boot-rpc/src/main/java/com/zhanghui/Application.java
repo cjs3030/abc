@@ -20,11 +20,11 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    @Bean
+  /*  @Bean
     public  Sender1 sender1(){
         return  new Sender1();
     }
-
+*/
 
     public static void main(String[] args) throws InterruptedException {
         SpringApplication.run(Application.class, args);

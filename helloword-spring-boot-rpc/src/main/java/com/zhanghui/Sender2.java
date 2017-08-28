@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Sender2 {
 
-    @Resource(name="firstRabbitTemplate")
-    private RabbitTemplate firstRabbitTemplate;
+    @Resource(name="secondRabbitTemplate")
+    private RabbitTemplate secondRabbitTemplate;
 
     /*
     public void send1() {
@@ -28,7 +28,7 @@ public class Sender2 {
         String context = "hello2 " + new Date();
         System.out.println("Sender : " + context);
         System.out.println("被动方发送反馈结果：开始...");
-        this.firstRabbitTemplate.convertAndSend("hello2", context);
+        this.secondRabbitTemplate.convertAndSend("hello2", context);
         System.out.println("被动方发送反馈结果：结束...");
     }
 

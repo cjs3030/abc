@@ -1,6 +1,14 @@
 # 怎么运行
-## 1.运行Application.Java
-## 2.运行TsetDemo01，模拟主动方调用
+## 方法一：
+### 1.运行Application.Java
+### 2.运行TestDemo01，模拟主动方调用
+
+## 方法二：
+### 1.在hello2对列对应mq中手动创建 hello2对列
+### 2.运行TestHello1
+
+## 方法三：（最新版本推荐）
+###  1.运行TestHello1，已经实现针对mq服务器创建各自对列
 
 ##  简单介绍
 

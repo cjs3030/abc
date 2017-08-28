@@ -1,6 +1,7 @@
 package com.zhanghui;
 
 
+import com.rabbitmq.client.AMQP;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -54,7 +55,7 @@ public class RabbitConfig {
     }
 
     @Bean(name="firstRabbitTemplate")
-    @Primary
+    //@Primary  //貌似没用，移除
     public RabbitTemplate firstRabbitTemplate(
             @Qualifier("firstConnectionFactory") ConnectionFactory connectionFactory
     ){
@@ -91,6 +92,39 @@ public class RabbitConfig {
     }
 
     @Bean
+    public String firstQueue(
+            @Qualifier("firstConnectionFactory") ConnectionFactory connectionFactory
+    ) {
+        System.out.println("configuration firstQueue ........................");
+        //return new Queue("hello1");
+        try {
+            connectionFactory.createConnection().createChannel(false).queueDeclare("hello1", false, false, false, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "firstQueue";
+        }
+    }
+
+    @Bean
+    public String secondQueue(
+            @Qualifier("secondConnectionFactory") ConnectionFactory connectionFactory
+    ) {
+        System.out.println("configuration secondQueue ........................");
+        //return new Queue("hello2");
+        try {
+             connectionFactory.createConnection().createChannel(false).queueDeclare("hello2", false, false, false, null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return "secondQueue";
+        }
+    }
+
+
+    //下面2个对列创建方式 测试后发现不是 针对指定mq 服务器创建，只会在第一个服务器创建
+    /*
+    @Bean
     public Queue firstQueue() {
         System.out.println("configuration firstQueue ........................");
         return new Queue("hello1");
@@ -101,4 +135,5 @@ public class RabbitConfig {
         System.out.println("configuration secondQueue ........................");
         return new Queue("hello2");
     }
+    */
 }
